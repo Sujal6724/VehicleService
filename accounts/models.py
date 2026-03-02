@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin , BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 from core.models import TimeStampedModel
 
@@ -9,20 +9,32 @@ class Role(TimeStampedModel):
     def __str__(self):
         return self.name
 
+
 class UserManager(BaseUserManager):
+    """Custom manager for User model with mobile authentication"""
+
     def create_user(self, mobile, password=None, **extra_fields):
         if not mobile:
-            raise ValueError("Mobile number is required")
+            raise ValueError('Mobile number is required')
+        email = extra_fields.get('email', '')
+        if email:
+            extra_fields['email'] = self.normalize_email(email)
         user = self.model(mobile=mobile, **extra_fields)
         user.set_password(password)
-        user.is_active = True
         user.save(using=self._db)
         return user
 
     def create_superuser(self, mobile, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault('role', 'ADMIN')
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)
+        if extra_fields.get('role') != 'ADMIN':
+            raise ValueError('Superuser must have role=ADMIN')
         return self.create_user(mobile, password, **extra_fields)
+
+    def get_by_natural_key(self, mobile):
+        return self.get(mobile=mobile)
+
 
 class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     ROLE_CHOICES = (
@@ -41,16 +53,10 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-
-    USERNAME_FIELD = "mobile"
-    REQUIRED_FIELDS = []
-
-    def __str__(self):
-        return self.mobile
-    
     objects = UserManager()
 
-
+    USERNAME_FIELD = "mobile"
+    REQUIRED_FIELDS = ['full_name']
 class OTP(TimeStampedModel):
     mobile = models.CharField(max_length=15, db_index=True)
     otp_code = models.CharField(max_length=6)
