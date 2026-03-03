@@ -8,8 +8,22 @@ __pycache__/
 db.sqlite3
 *.sqlite3
 
+# Django
+*.log
+media/
+
 # Static files
 staticfiles/
+
+# Virtual environment
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
 
 # Environment
 .hintrc
