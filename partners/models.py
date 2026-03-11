@@ -2,6 +2,7 @@ from django.db import models
 from core.models import TimeStampedModel
 from accounts.models import User
 from services.models import ServiceCategory
+from partners.models import PartnerProfile
 
 
 class PartnerProfile(TimeStampedModel):
@@ -24,3 +25,6 @@ class PartnerService(TimeStampedModel):
 
     class Meta:
         unique_together = ("partner", "service")
+
+    def __str__(self):
+        return f"{self.partner} - {self.service}"
