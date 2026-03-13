@@ -21,13 +21,17 @@ media/
 venv/
 env/
 
-<<<<<<< HEAD
 # VS Code settings
 .vscode/
-=======
 # VS Code
 .vscode/
 
 # PyCharm
 .idea/
->>>>>>> upstream/main
+
+# Static files
+staticfiles/
+
+# Environment
+.hintrc
+ vehicalserviceteam

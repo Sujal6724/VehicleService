@@ -1,5 +1,13 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Booking, BookingTimeline 
+from .serializers import BookingSerializer, BookingtTimelineSerializer
 
-        status_param = self.request.query_params.get("status")
-        if status_param:
-            queryset = queryset.filter(status=status_param)
+# Create your views here.
+
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    
+class BookingTimelineViewset(viewsets.ModelViewSet):
+    queryset = BookingTimeline.objects.all()
+    serializer_class = BookingtTimelineSerializer    
