@@ -6,6 +6,7 @@ class Partner(models.Model):
     vehicle_number = models.CharField(max_length=20)
     vehicle_type = models.CharField(max_length=50)
     is_available = models.BooleanField(default=True)
+    earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return self.name

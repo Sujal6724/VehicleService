@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PartnerProfile, PartnerService
+from .models import Partner
 
-admin.site.register(PartnerProfile)
-admin.site.register(PartnerService)# Register your models here.
+admin.site.register(Partner)
+# Register your models here.

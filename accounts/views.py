@@ -1,13 +1,24 @@
-from rest_framework import viewsets
-from .models import PartnerProfile, PartnerService
-from .serializers import PartnerProfileSerializer, PartnerServiceSerializer
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+from rest_framework import status, generics
+from rest_framework.permissions import AllowAny
+from .serializers import LoginSerializer
+from .models import User
 
 
-class PartnerProfileViewSet(viewsets.ModelViewSet):
-    queryset = PartnerProfile.objects.all()
-    serializer_class = PartnerProfileSerializer
+class LoginAPIView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
 
-
-class PartnerServiceViewSet(viewsets.ModelViewSet):
-    queryset = PartnerService.objects.all()
-    serializer_class = PartnerServiceSerializer
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.id,
+            'mobile': user.mobile,
+            'full_name': user.full_name,
+            'role': user.role
+        }, status=status.HTTP_200_OK)

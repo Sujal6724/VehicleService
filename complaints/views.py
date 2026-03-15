@@ -2,8 +2,6 @@ from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-<<<<<<< HEAD
-
 from .models import Complaint
 from .serializers import ComplaintSerializer, ComplaintCreateSerializer, ComplaintUpdateSerializer
 
@@ -65,7 +63,6 @@ class ComplaintViewSet(viewsets.ModelViewSet):
         complaint.resolution_note = request.data.get('resolution_note', '')
         complaint.save()
         return Response(ComplaintSerializer(complaint).data, status=status.HTTP_200_OK)
-=======
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q, Count
 from django.utils import timezone
@@ -391,4 +388,4 @@ class ComplaintTypeViewSet(viewsets.ModelViewSet):
                 f"Set is_active=False instead to hide it."
             )
         instance.delete()
->>>>>>> 8b35b9a (Completed complaints module with validation and testing)
+
