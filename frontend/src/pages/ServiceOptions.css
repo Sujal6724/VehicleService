@@ -1,30 +1,26 @@
-/* ═══════════════════════════════════════════════════════════
-   ServiceOptions.css
-   Pickup & Drop Option — dark navy, blue accents
-   Matches the Figma design exactly.
-   ═══════════════════════════════════════════════════════════ */
+
  
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap');
  
-/* ── Variables ─────────────────────────────────────── */
+
 :root {
   --so-bg:       #0b0f1a;
   --so-modal:    #0d1117;
   --so-card:     #111827;
-  --so-cb:       rgba(255,255,255,0.07);   /* card border */
+  --so-cb:       rgba(255,255,255,0.07);   
   --so-blue:     #3b82f6;
   --so-glow:     rgba(59,130,246,0.22);
   --so-dim:      rgba(59,130,246,0.1);
   --so-text:     #e6edf3;
   --so-sub:      #8b949e;
   --so-muted:    rgba(255,255,255,0.28);
-  --so-ibg:      #161b22;                  /* input bg */
-  --so-ib:       rgba(255,255,255,0.08);   /* input border */
+  --so-ibg:      #161b22;                  
+  --so-ib:       rgba(255,255,255,0.08);   
   --so-font:     'DM Sans', sans-serif;
   --so-disp:     'Sora', sans-serif;
 }
  
-/* ── Overlay ────────────────────────────────────────── */
+
 .so-overlay {
   position: fixed;
   inset: 0;
