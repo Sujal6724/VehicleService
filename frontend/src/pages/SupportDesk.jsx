@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
- 
+
 const API_BASE = "http://127.0.0.1:8000/api/v1";
 const FONTS_ID = "sd-fonts";
 const STYLE_ID = "sd-styles";
- 
+
 const CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 .sd-root{min-height:100vh;background:#f0f0ec;font-family:'DM Sans',sans-serif;color:#1a1a1a;display:flex;flex-direction:column;}
@@ -159,7 +159,7 @@ const CSS = `
   .sd-agent-info{display:none;}
 }
 `;
- 
+
 const SEED = [
   { id:"#12084",title:"Dashboard loading error on iOS",  meta:"Product: Mobile App • Category: Technical",    requester:"John Doe",          req_type:"Customer",       ini:"JD",col:"#6366f1",st:"in_progress",   pr:"critical", act:"Updated 4m ago",   desc:"The dashboard fails to load on iOS after the latest app update. Users report an infinite spinner." },
   { id:"#12083",title:"Spare parts bulk order request",  meta:"Product: Service Parts • Category: Sales",    requester:"TechCenter Phoenix",req_type:"Service Center",  ini:"TC",col:"#0ea5e9",st:"new",           pr:"medium",   act:"Created 12m ago",  desc:"Service center requesting bulk Q4 spare parts order. Needs sales approval." },
@@ -168,12 +168,12 @@ const SEED = [
   { id:"#12080",title:"OTP not delivered to mobile",     meta:"Product: Auth • Category: Technical",        requester:"Sara Lee",          req_type:"Customer",       ini:"SL",col:"#8b5cf6",st:"open",           pr:"high",     act:"Created 2h ago",   desc:"Customer not receiving OTP SMS during login." },
   { id:"#12079",title:"Partner payout delayed 3 weeks",  meta:"Product: Payments • Category: Billing",      requester:"Ravi Motors",       req_type:"Service Center",  ini:"RM",col:"#10b981",st:"escalated",      pr:"urgent",   act:"Escalated 30m ago", desc:"Partner has not received payout for 3 completed bookings. Escalated." },
 ];
- 
+
 const CHART = [
   {d:"M",h:45,hl:false},{d:"T",h:62,hl:false},{d:"W",h:90,hl:true},
   {d:"T",h:72,hl:false},{d:"F",h:55,hl:false},{d:"S",h:40,hl:false},{d:"S",h:65,hl:false},
 ];
- 
+
 const authH = () => ({ "Content-Type":"application/json", Authorization:`Bearer ${localStorage.getItem("token")||""}` });
 const api   = (m,url,b) => fetch(`${API_BASE}${url}`,{ method:m, headers:authH(), ...(b?{body:JSON.stringify(b)}:{}) });
  
